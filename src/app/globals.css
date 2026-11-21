@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
+/* Dark mode is driven by [data-theme="dark"] on <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* =========================================================
+   Design tokens — mirrored 1:1 from the Figma variables
+   ========================================================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* surfaces */
+  --bg-ice: #e6eef0;
+  --neutral-100: #edf2f3;
+  --border: #c5d6da;
+  --border-field: #748b92;
+  --focus: #0f5260;
+
+  /* text */
+  --text-primary: #102a31;
+  --text-muted: #44575e;
+  --text-placeholder: #576c73;
+  --text-disabled: #6f858b;
+  --text-inverse: #f3f8f9;
+  --on-accent: #0b3a45;
+
+  /* teal */
+  --teal-50: #e4eff1;
+  --teal-200: #a9c9cf;
+  --teal-500: #2a7383;
+  --teal-700: #0f5260;
+  --teal-900: #0b3a45;
+
+  /* peach */
+  --peach-100: #fdede4;
+  --peach-300: #f6c6ac;
+  --peach-500: #ee9c78;
+  --peach-700: #9c4a2a;
+
+  /* amber */
+  --amber-100: #fbefd5;
+  --amber-500: #d9962b;
+  --amber-700: #7a4f08;
+
+  /* violet */
+  --violet-100: #ece9f7;
+  --violet-500: #7b6cc2;
+  --violet-700: #4f4385;
+
+  /* danger */
+  --danger: #a8423b;
+  --danger-100: #f6e1de;
+
+  /* neumorphic shadow colours */
+  --shadow-highlight: rgba(255, 255, 255, 0.95);
+  --shadow-drop: rgba(166, 188, 194, 0.65);
+  --focus-halo: rgba(15, 82, 96, 0.22);
+  --scrim: rgba(11, 58, 69, 0.42);
+  --paper: #fcffff;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg-ice: #1e2a2e;
+  --neutral-100: #26343a;
+  --border: #2e3e43;
+  --border-field: #6c8389;
+  --focus: #5bb8c6;
+
+  --text-primary: #e6eef0;
+  --text-muted: #a9bcc1;
+  --text-placeholder: #8ea3a9;
+  --text-disabled: #6c8389;
+  --text-inverse: #0d1b1f;
+  --on-accent: #0b3a45;
+
+  --teal-50: #1f3a40;
+  --teal-200: #3d6c75;
+  --teal-500: #4fa6b5;
+  --teal-700: #5bb8c6;
+  --teal-900: #e3eef0;
+
+  --peach-100: #3a2a22;
+  --peach-300: #e8a684;
+  --peach-500: #ee9c78;
+  --peach-700: #f2b08f;
+
+  --amber-100: #3a2f1a;
+  --amber-500: #e5ab4f;
+  --amber-700: #f0c27a;
+
+  --violet-100: #2c2846;
+  --violet-500: #9a8ce0;
+  --violet-700: #c3b8f5;
+
+  --danger: #f08a80;
+  --danger-100: #3b2422;
+
+  --shadow-highlight: rgba(45, 61, 66, 0.9);
+  --shadow-drop: rgba(11, 18, 20, 0.85);
+  --focus-halo: rgba(91, 184, 198, 0.25);
+  --scrim: rgba(5, 10, 12, 0.6);
+  --paper: #26363b;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ice: var(--bg-ice);
+  --color-neutral-100: var(--neutral-100);
+  --color-line: var(--border);
+  --color-field: var(--border-field);
+  --color-focus: var(--focus);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-placeholder: var(--text-placeholder);
+  --color-disabled: var(--text-disabled);
+  --color-inverse: var(--text-inverse);
+  --color-on-accent: var(--on-accent);
+
+  --color-teal-50: var(--teal-50);
+  --color-teal-200: var(--teal-200);
+  --color-teal-500: var(--teal-500);
+  --color-teal-700: var(--teal-700);
+  --color-teal-900: var(--teal-900);
+
+  --color-peach-100: var(--peach-100);
+  --color-peach-300: var(--peach-300);
+  --color-peach-500: var(--peach-500);
+  --color-peach-700: var(--peach-700);
+
+  --color-amber-100: var(--amber-100);
+  --color-amber-500: var(--amber-500);
+  --color-amber-700: var(--amber-700);
+
+  --color-violet-100: var(--violet-100);
+  --color-violet-500: var(--violet-500);
+  --color-violet-700: var(--violet-700);
+
+  --color-danger: var(--danger);
+  --color-danger-100: var(--danger-100);
+  --color-paper: var(--paper);
+
+  /* Neu/Light/* effect styles */
+  --shadow-neu-sm: 4px 4px 9px 0 var(--shadow-drop), -4px -4px 9px 0 var(--shadow-highlight);
+  --shadow-neu: 7px 7px 16px 0 var(--shadow-drop), -7px -7px 16px 0 var(--shadow-highlight);
+  --shadow-neu-lg: 14px 14px 32px 0 var(--shadow-drop), -14px -14px 32px 0 var(--shadow-highlight);
+  --shadow-neu-inset: inset 4px 4px 8px 0 var(--shadow-drop), inset -4px -4px 8px 0 var(--shadow-highlight);
+  --shadow-focus: 0 0 0 4px var(--focus-halo);
+
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-ice);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fraunces display face — SOFT 0, WONK 1 as set in Figma */
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+/* Inset well (input fields, progress tracks) */
+.neu-inset {
+  background: var(--bg-ice);
+  box-shadow: var(--shadow-neu-inset);
+}
+
+::placeholder {
+  color: var(--text-placeholder);
+  opacity: 1;
+}
+
+button,
+a {
+  cursor: pointer;
 }

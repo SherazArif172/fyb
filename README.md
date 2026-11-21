@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Research Project Manager — Frontend
 
-## Getting Started
-
-First, run the development server:
+Next.js 15 (App Router) + TypeScript + Tailwind CSS v4 implementation of the Figma design
+(neumorphic "ice" theme, DM Sans + Fraunces). Frontend only — all data is mocked in `src/lib/`
+and is meant to be replaced by API calls when the backend is built.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Area | Route | Figma frame |
+| --- | --- | --- |
+| Auth | `/login` · `/signup` · `/forgot-password` · `/check-email` · `/reset-password` | Auth / * (desktop + mobile login) |
+| Public | `/` · `/explore` (search with no matches → empty state) · `/explore/[slug]` | P-01 · P-02 / P-02b · P-03 |
+| Student | `/student` · `/student?tour=1` · `/student?menu=open` | S-01 · S-01b · S-01c |
+| | `/student/projects` · `/student/projects/new` | S-02 · S-03 |
+| | `/student/projects/[id]` · `/student/projects/[id]/milestones/[m]` (`?upload=1`) | S-04 · S-05 · S-06 |
+| | `/student/notifications` · `/student/settings` | S-07 · S-08 |
+| Supervisor | `/supervisor` · `/supervisor/projects` · `/supervisor/reviews/[id]` | V-01 · V-02 · V-03 |
+| Admin | `/admin` · `/admin/projects` (`?assign=1`) · `/admin/users` | A-01 · A-02 / A-03 · A-04 |
+| | `/admin/publish-requests` · `/admin/featured` · `/admin/research-areas` | A-05 · A-06 · A-07 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Routes not drawn in Figma but linked from the navigation (`/supervisor/reviews`, `/supervisor/notifications`,
+`/supervisor/settings`, `/admin/settings`) are built from the same components.
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/                 routes (auth, public, student, supervisor, admin)
+  components/
+    ui/                design-system primitives (Button, Input, Card, StatusChip, Modal, Drawer, Donut…)
+    layout/            AppShell, Sidebar, TopBar, UserMenu, Tour
+    auth/ public/ project/ admin/   feature components
+    theme/             light/dark ThemeProvider
+  lib/                 mock data
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design tokens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All colours/shadows come from the Figma variables and live in `src/app/globals.css` as CSS variables,
+exposed to Tailwind as `bg-ice`, `text-ink`, `text-muted`, `teal-*`, `peach-*`, `shadow-neu`, `shadow-neu-inset`, etc.
+Dark mode (`[data-theme="dark"]`) uses the Figma dark values and is toggled from the user menu or Settings.
+Icons use `lucide-react` (same geometry as the Figma icon set) so they follow the theme colour.
