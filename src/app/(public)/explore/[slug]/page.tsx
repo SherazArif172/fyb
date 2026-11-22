@@ -31,7 +31,7 @@ function Label({ children }: { children: React.ReactNode }) {
 
 function Section({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <section className={`flex w-full flex-col items-start rounded-[24px] bg-ice shadow-neu ${className}`}>
+    <section className={`flex w-full flex-col items-start rounded-[24px] bg-ice shadow-neu max-sm:!p-[20px] ${className}`}>
       <h2 className="text-[17px] leading-normal font-semibold text-teal-900">{title}</h2>
       {children}
     </section>
@@ -53,15 +53,15 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   return (
     <PublicLayout>
-      <div className="flex flex-col gap-[28px] px-6 pt-[12px] pb-[72px] lg:px-[80px]">
+      <div className="flex flex-col gap-[20px] px-4 sm:gap-[28px] sm:px-6 pt-[12px] pb-[56px] sm:pb-[72px] lg:px-[80px]">
         <Link href="/explore" className="inline-flex items-center gap-[8px] self-start text-[14px] leading-normal font-semibold text-teal-700">
           <Icon name="arrowLeft" />
           Back to projects
         </Link>
 
         {/* Hero */}
-        <section className="flex w-full flex-col items-start gap-[20px] rounded-[24px] bg-ice p-[24px] shadow-neu-lg lg:p-[36px]">
-          <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] lg:h-[300px]">
+        <section className="flex w-full flex-col items-start gap-[18px] rounded-[24px] bg-ice p-[16px] shadow-neu-lg sm:gap-[20px] sm:p-[24px] lg:p-[36px]">
+          <div className="relative h-[180px] w-full overflow-hidden rounded-[16px] sm:h-[220px] sm:rounded-[20px] lg:h-[300px]">
             <Image src={project.cover} alt="" fill priority sizes="1280px" className="object-cover" />
           </div>
           <div className="flex flex-wrap items-center gap-[8px]">
@@ -69,7 +69,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <StatusChip status="Published" />
             <span className="text-[13px] leading-normal text-muted">Published 12 Jun 2026</span>
           </div>
-          <h1 className="font-display w-full text-[32px] leading-[38px] font-semibold tracking-[-0.63px] text-teal-900 lg:text-[42px] lg:leading-[48px]">
+          <h1 className="font-display w-full text-[26px] leading-[32px] sm:text-[32px] sm:leading-[38px] font-semibold tracking-[-0.63px] text-teal-900 lg:text-[42px] lg:leading-[48px]">
             {project.title}
           </h1>
           <div className="flex flex-wrap items-center gap-x-[40px] gap-y-[20px]">

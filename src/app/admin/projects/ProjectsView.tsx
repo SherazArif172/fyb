@@ -13,7 +13,7 @@ import { Icon } from "@/components/ui/Icon";
 import { ProgressBar } from "@/components/ui/Progress";
 import { Segmented } from "@/components/ui/Segmented";
 import { StatusChip, type Status } from "@/components/ui/StatusChip";
-import { Cell, Pagination, TableHead } from "@/components/ui/Table";
+import { Cell, Row, Pagination, TableHead, TableScroll } from "@/components/ui/Table";
 
 type Row = {
   title: string;
@@ -77,7 +77,7 @@ export function ProjectsView() {
               { value: "published", label: "Published 25" },
             ]}
           />
-          <div className="flex items-center gap-[12px]">
+          <div className="flex w-full flex-wrap items-center gap-[12px] sm:w-auto">
             <SearchInput value={q} onChange={setQ} placeholder="Search projects" width={240} />
             <button type="button" className="neu-inset flex h-[44px] items-center gap-[10px] rounded-[14px] border border-field px-[16px] text-[13.5px] font-medium text-ink">
               <Icon name="filter" className="text-muted" />
@@ -89,7 +89,8 @@ export function ProjectsView() {
           </div>
         </div>
 
-        <Card className="flex flex-col p-[24px]">
+        <Card className="flex flex-col p-[18px] sm:p-[24px]">
+          <TableScroll min={980}>
           <TableHead
             cols={[
               { label: "PROJECT" },
@@ -101,15 +102,15 @@ export function ProjectsView() {
             ]}
           />
           {list.map((r) => (
-            <div key={r.title} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[14px]">
+            <Row key={r.title}>
               <Cell className="flex-col items-start gap-[2px] leading-normal">
                 <span className="text-[13.5px] font-semibold text-ink">{r.title}</span>
                 <span className="text-[12px] text-muted">{r.meta}</span>
               </Cell>
-              <Cell w={170}>
+              <Cell label="Student" w={170}>
                 <Person {...r.student} />
               </Cell>
-              <Cell w={184}>
+              <Cell label="Supervisor" w={184}>
                 {r.supervisor ? (
                   <Person {...r.supervisor} />
                 ) : (
@@ -123,11 +124,11 @@ export function ProjectsView() {
                   </button>
                 )}
               </Cell>
-              <Cell w={120} className="gap-[8px]">
+              <Cell label="Progress" w={120} className="gap-[8px]">
                 <ProgressBar value={r.progress} className="flex-1" />
                 <span className="text-[12px] leading-normal font-semibold text-ink">{r.progress}%</span>
               </Cell>
-              <Cell w={170}>
+              <Cell label="Status" w={170}>
                 <StatusChip status={r.status} />
               </Cell>
               <Cell w={64} className="gap-[12px] text-muted">
@@ -138,8 +139,9 @@ export function ProjectsView() {
                   <Icon name="more" />
                 </button>
               </Cell>
-            </div>
+            </Row>
           ))}
+          </TableScroll>
           <Pagination summary="Showing 1–7 of 128 projects" page={1} labels={["1", "2", "3", "…", "19"]} />
         </Card>
       </PageBody>

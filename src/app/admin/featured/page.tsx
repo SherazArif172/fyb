@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { SearchInput, Toggle } from "@/components/ui/Form";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHead } from "@/components/ui/Section";
-import { Cell, TableHead } from "@/components/ui/Table";
+import { Cell, Row, TableHead, TableScroll } from "@/components/ui/Table";
 import { publishedProjects } from "@/lib/data";
 
 type Item = { slug: string; title: string; area: string; author: string; year: number; cover?: string };
@@ -47,7 +47,7 @@ export default function FeaturedPage() {
     <>
       <TopBar role="admin" title="Featured projects" subtitle="Pick up to 3 published projects to show on the home page" />
       <PageBody className="pt-[8px] pb-[48px]">
-        <Card className="flex flex-col gap-[20px] p-[24px]">
+        <Card className="flex flex-col gap-[20px] p-[18px] sm:p-[24px]">
           <SectionHead title="On the home page" action={<span className="text-[13.5px] text-teal-700">{featured.length} of 3 slots used</span>} />
           <div className="grid grid-cols-1 items-start gap-[24px] md:grid-cols-3">
             {[0, 1, 2].map((i) => {
@@ -93,29 +93,31 @@ export default function FeaturedPage() {
           </div>
         </Card>
 
-        <Card className="flex flex-col p-[24px]">
-          <div className="flex items-center justify-between gap-4">
+        <Card className="flex flex-col p-[18px] sm:p-[24px]">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <h2 className="text-[17px] leading-normal font-semibold text-teal-900">Published projects</h2>
             <SearchInput value={q} onChange={setQ} placeholder="Search published projects" width={280} />
           </div>
+          <TableScroll min={760}>
           <TableHead cols={[{ label: "PROJECT" }, { label: "AREA", w: 190 }, { label: "AUTHOR", w: 190 }, { label: "YEAR", w: 80 }, { label: "FEATURED", w: 90 }]} />
           {list.map((p) => (
-            <div key={p.slug} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[14px]">
+            <Row key={p.slug}>
               <Cell className="text-[13.5px] leading-normal font-semibold text-ink">{p.title}</Cell>
-              <Cell w={190}>
+              <Cell label="Area" w={190}>
                 <AreaTag>{p.area}</AreaTag>
               </Cell>
-              <Cell w={190} className="text-[13.5px] leading-normal text-ink">
+              <Cell label="Author" w={190} className="text-[13.5px] leading-normal text-ink">
                 {p.author}
               </Cell>
-              <Cell w={80} className="text-[13.5px] leading-normal text-muted">
+              <Cell label="Year" w={80} className="text-[13.5px] leading-normal text-muted">
                 {p.year}
               </Cell>
-              <Cell w={90}>
+              <Cell label="Featured" w={90}>
                 <Toggle on={featured.includes(p.slug)} onChange={(v) => toggle(p.slug, v)} label={`Feature ${p.title}`} />
               </Cell>
-            </div>
+            </Row>
           ))}
+          </TableScroll>
           <div className="neu-inset mt-[2px] flex items-start gap-[10px] rounded-[14px] p-[14px]">
             <Icon name="star" className="shrink-0 text-teal-700" />
             <p className="flex-1 text-[12.5px] leading-[18px] text-teal-700">

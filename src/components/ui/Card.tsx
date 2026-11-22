@@ -95,17 +95,17 @@ export function StatCard({
     violet: "bg-violet-100 text-violet-700",
   };
   return (
-    <Card className={cn("flex flex-col items-start gap-[14px] p-[22px]", className)}>
-      <div className="flex w-full items-center justify-between">
-        <IconTile icon={icon} iconClassName={iconClassName} />
+    <Card className={cn("flex flex-col items-start gap-[10px] p-[16px] sm:gap-[14px] sm:p-[22px]", className)}>
+      <div className="flex w-full items-center justify-between gap-2">
+        <IconTile icon={icon} iconClassName={iconClassName} className="max-sm:!size-[36px] max-sm:!rounded-[12px]" />
         {trend && (
-          <span className={cn("rounded-full px-[9px] py-[4px] text-[11.5px] leading-normal font-semibold", tones[trendTone])}>
+          <span className={cn("truncate rounded-full px-[7px] py-[3px] text-[10.5px] leading-normal font-semibold sm:px-[9px] sm:py-[4px] sm:text-[11.5px]", tones[trendTone])}>
             {trend}
           </span>
         )}
       </div>
-      <p className="font-display text-[34px] leading-[40px] font-semibold text-teal-900">{value}</p>
-      <p className="text-[13.5px] leading-normal text-muted">{label}</p>
+      <p className="font-display text-[26px] leading-[32px] font-semibold text-teal-900 sm:text-[34px] sm:leading-[40px]">{value}</p>
+      <p className="text-[12.5px] leading-normal text-muted sm:text-[13.5px]">{label}</p>
     </Card>
   );
 }

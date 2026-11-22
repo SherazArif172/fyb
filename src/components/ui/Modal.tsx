@@ -35,11 +35,11 @@ export function Modal({
 
   if (!open || !mounted) return null;
   return createPortal(
-    <div className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto p-6 pt-[150px]" style={{ background: "var(--scrim)" }} onMouseDown={onClose}>
+    <div className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto p-3 pt-6 sm:p-6 sm:pt-[150px]" style={{ background: "var(--scrim)" }} onMouseDown={onClose}>
       <div
         role="dialog"
         aria-modal="true"
-        className={cn("flex w-full flex-col gap-[22px] rounded-[30px] bg-ice p-[32px] shadow-neu-lg", className)}
+        className={cn("flex w-full flex-col gap-[22px] rounded-[24px] bg-ice p-[20px] shadow-neu-lg sm:rounded-[30px] sm:p-[32px]", className)}
         style={{ maxWidth: width }}
         onMouseDown={(e) => e.stopPropagation()}
       >

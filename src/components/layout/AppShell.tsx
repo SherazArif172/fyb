@@ -13,5 +13,5 @@ export function AppShell({ role, children }: { role: Role; children: React.React
 
 /* Standard page body padding under the top bar */
 export function PageBody({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <main className={`flex flex-col gap-[28px] px-[40px] pb-[40px] ${className}`}>{children}</main>;
+  return <main className={`flex min-w-0 flex-col gap-[20px] px-4 pb-[40px] sm:gap-[28px] sm:px-6 lg:px-[40px] ${className}`}>{children}</main>;
 }

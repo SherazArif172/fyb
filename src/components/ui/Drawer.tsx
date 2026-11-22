@@ -21,7 +21,7 @@ export function Drawer({ open, onClose, children }: { open: boolean; onClose: ()
         role="dialog"
         aria-modal="true"
         onMouseDown={(e) => e.stopPropagation()}
-        className="absolute top-0 right-0 flex h-full w-full max-w-[440px] flex-col gap-[20px] overflow-y-auto rounded-l-[30px] bg-ice p-[32px] drop-shadow-[-12px_0_20px_rgba(5,31,41,0.3)]"
+        className="absolute top-0 right-0 flex h-full w-full max-w-[440px] flex-col gap-[20px] overflow-y-auto rounded-l-[24px] bg-ice p-[20px] sm:rounded-l-[30px] sm:p-[32px] drop-shadow-[-12px_0_20px_rgba(5,31,41,0.3)]"
       >
         {children}
       </aside>

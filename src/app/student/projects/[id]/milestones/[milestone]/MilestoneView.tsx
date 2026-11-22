@@ -48,7 +48,7 @@ export function MilestoneView() {
         subtitle={<Breadcrumb items={[{ label: "Crop Yield Prediction using ML", href: `/student/projects/${id}` }, { label: "Implementation" }]} />}
       />
       <PageBody className="pt-[8px] pb-[48px]">
-        <Card className="flex flex-wrap items-center justify-between gap-6 p-[28px] shadow-neu-lg">
+        <Card className="flex flex-wrap items-center justify-between gap-6 p-[20px] sm:p-[28px] shadow-neu-lg">
           <div className="flex flex-col gap-[10px]">
             <div className="flex items-center gap-[10px]">
               <StatusChip status="Under Review" />
@@ -57,12 +57,12 @@ export function MilestoneView() {
                 Due 25 Nov 2026 · 3 days left
               </span>
             </div>
-            <h2 className="font-display text-[30px] leading-[36px] font-semibold tracking-[-0.3px] text-teal-900">Implementation</h2>
+            <h2 className="font-display text-[24px] leading-[30px] font-semibold tracking-[-0.3px] text-teal-900 sm:text-[30px] sm:leading-[36px]">Implementation</h2>
             <p className="text-[14.5px] leading-normal text-muted">
               Build and evaluate the prediction models. Submit the results chapter and source code.
             </p>
           </div>
-          <div className="flex gap-[12px]">
+          <div className="flex flex-wrap gap-[12px]">
             <Button variant="secondary" icon="download">
               Download latest
             </Button>
@@ -74,7 +74,7 @@ export function MilestoneView() {
 
         <div className="flex flex-col gap-[28px] xl:flex-row xl:items-start">
           <div className="flex min-w-0 flex-1 flex-col gap-[28px]">
-            <Card className="flex flex-col gap-[6px] p-[24px]">
+            <Card className="flex flex-col gap-[6px] p-[18px] sm:p-[24px]">
               <SectionHead title="Version history" link="3 versions" />
               <VersionRow
                 active
@@ -100,7 +100,7 @@ export function MilestoneView() {
               />
             </Card>
 
-            <Card className="flex flex-col gap-[18px] p-[24px]">
+            <Card className="flex flex-col gap-[18px] p-[18px] sm:p-[24px]">
               <SectionHead title="Feedback" link="4 comments" />
               <FeedbackThread
                 items={thread}
@@ -110,7 +110,7 @@ export function MilestoneView() {
             </Card>
           </div>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[16px] p-[24px] xl:w-[320px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[16px] p-[18px] sm:p-[24px] xl:w-[320px]">
             <SectionHead title="Milestone info" />
             <div className="flex items-center justify-between">
               <span className="text-[13.5px] leading-normal text-muted">Status</span>

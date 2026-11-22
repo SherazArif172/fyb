@@ -10,7 +10,7 @@ import { FilterSelect, SearchInput } from "@/components/ui/Form";
 import { Icon } from "@/components/ui/Icon";
 import { ProgressBar } from "@/components/ui/Progress";
 import { StatusChip, type Status } from "@/components/ui/StatusChip";
-import { Cell, Pagination, TableHead } from "@/components/ui/Table";
+import { Cell, Row, Pagination, TableHead, TableScroll } from "@/components/ui/Table";
 import { cn } from "@/lib/cn";
 
 const rows: {
@@ -55,8 +55,10 @@ export default function AssignedProjectsPage() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-[12px]">
             <SearchInput value={q} onChange={setQ} placeholder="Search by student or project" width={300} />
-            <FilterSelect options={areas} value={area} onChange={setArea} />
-            <FilterSelect options={statuses} value={status} onChange={setStatus} />
+            <div className="flex w-full gap-[12px] sm:w-auto">
+              <FilterSelect options={areas} value={area} onChange={setArea} className="min-w-0 flex-1 sm:flex-none" />
+              <FilterSelect options={statuses} value={status} onChange={setStatus} className="min-w-0 flex-1 sm:flex-none" />
+            </div>
           </div>
           <span className="flex items-center gap-[8px] text-[13px] leading-normal font-medium text-teal-700">
             <Icon name="eye" />
@@ -64,7 +66,8 @@ export default function AssignedProjectsPage() {
           </span>
         </div>
 
-        <Card className="flex flex-col p-[24px]">
+        <Card className="flex flex-col p-[18px] sm:p-[24px]">
+          <TableScroll min={980}>
           <TableHead
             cols={[
               { label: "STUDENT", w: 200 },
@@ -76,7 +79,7 @@ export default function AssignedProjectsPage() {
             ]}
           />
           {list.map((r) => (
-            <div key={r.id} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[14px]">
+            <Row key={r.id}>
               <Cell w={200} className="gap-[10px]">
                 <Avatar initials={r.initials} />
                 <span className="flex flex-col leading-normal whitespace-nowrap">
@@ -84,19 +87,19 @@ export default function AssignedProjectsPage() {
                   <span className="text-[12px] text-muted">{r.id}</span>
                 </span>
               </Cell>
-              <Cell className="flex-col items-start gap-[3px] leading-normal">
+              <Cell label="Project" className="flex-col items-start gap-[3px] leading-normal">
                 <span className="text-[13.5px] font-semibold text-ink">{r.project}</span>
                 <span className="text-[12px] text-muted">{r.area}</span>
               </Cell>
-              <Cell w={160} className="gap-[8px]">
+              <Cell label="Progress" w={160} className="gap-[8px]">
                 <ProgressBar value={r.progress} className="flex-1" />
                 <span className="text-[12.5px] leading-normal font-semibold text-ink">{r.progress}%</span>
               </Cell>
-              <Cell w={150} className="flex-col items-start gap-[2px] leading-normal whitespace-nowrap">
+              <Cell label="Next milestone" w={150} className="flex-col items-start gap-[2px] leading-normal whitespace-nowrap">
                 <span className="text-[13px] font-medium text-ink">{r.next}</span>
                 <span className={cn("text-[12px]", r.late ? "text-danger" : "text-muted")}>{r.due}</span>
               </Cell>
-              <Cell w={150}>
+              <Cell label="Status" w={150}>
                 <StatusChip status={r.status} />
               </Cell>
               <Cell w={70}>
@@ -104,8 +107,9 @@ export default function AssignedProjectsPage() {
                   Open
                 </ButtonLink>
               </Cell>
-            </div>
+            </Row>
           ))}
+          </TableScroll>
           {list.length === 0 && <p className="py-10 text-center text-[14px] text-muted">No projects match these filters.</p>}
           <Pagination summary={`Showing 1–${list.length} of ${rows.length} projects`} />
         </Card>

@@ -16,7 +16,7 @@ export function SectionHead({
   className?: string;
 }) {
   return (
-    <div className={cn("flex w-full items-center justify-between gap-4 leading-normal font-semibold", className)}>
+    <div className={cn("flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 leading-normal font-semibold", className)}>
       <h2 className="text-[17px] whitespace-nowrap text-teal-900">{title}</h2>
       {link && (
         <Link href={href} className="text-[13.5px] whitespace-nowrap text-teal-700 hover:underline">

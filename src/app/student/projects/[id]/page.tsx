@@ -59,14 +59,14 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
       />
       <PageBody className="pt-[8px] pb-[48px]">
         {/* Header */}
-        <Card className="flex flex-col gap-[22px] p-[32px] shadow-neu-lg">
+        <Card className="flex flex-col gap-[22px] p-[20px] sm:p-[32px] shadow-neu-lg">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="flex max-w-[640px] flex-col gap-[12px]">
               <div className="flex items-center gap-[8px]">
                 <AreaTag>Machine Learning</AreaTag>
                 <StatusChip status="In Progress" />
               </div>
-              <h2 className="font-display text-[30px] leading-[36px] font-semibold tracking-[-0.3px] text-teal-900">
+              <h2 className="font-display text-[24px] leading-[30px] font-semibold tracking-[-0.3px] text-teal-900 sm:text-[30px] sm:leading-[36px]">
                 Crop Yield Prediction using Machine Learning
               </h2>
               <p className="max-w-[620px] text-[14.5px] leading-[22px] text-muted">
@@ -109,7 +109,7 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
 
         {/* Columns */}
         <div className="flex flex-col gap-[28px] xl:flex-row xl:items-start">
-          <Card className="flex min-w-0 flex-1 flex-col gap-[6px] p-[24px]">
+          <Card className="flex min-w-0 flex-1 flex-col gap-[6px] p-[18px] sm:p-[24px]">
             <SectionHead title="Milestones" link="+ Add milestone" />
             {milestones.map((m) => {
               const current = m.state === "current";
@@ -118,12 +118,12 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
                   key={m.slug}
                   href={`${base}/milestones/${m.slug}`}
                   className={cn(
-                    "flex items-center gap-[16px] px-[18px] py-[16px] transition",
+                    "flex items-center gap-[12px] px-[12px] py-[14px] transition sm:gap-[16px] sm:px-[18px] sm:py-[16px]",
                     current ? "rounded-[14px] bg-teal-50" : "border-b border-line hover:bg-teal-50/50",
                   )}
                 >
                   <StepNode state={m.state} />
-                  <div className={cn("flex min-w-0 flex-1 flex-col gap-[2px] leading-normal whitespace-nowrap", m.state === "todo" && "text-muted")}>
+                  <div className={cn("flex min-w-0 flex-1 flex-col gap-[2px] leading-normal sm:whitespace-nowrap", m.state === "todo" && "text-muted")}>
                     <span className={cn("text-[15px] font-semibold", m.state !== "todo" && "text-ink")}>{m.name}</span>
                     <span className={cn("text-[12.5px]", current ? "text-peach-700" : "text-muted")}>{m.sub}</span>
                   </div>
@@ -131,14 +131,14 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
                     <Icon name="file" />
                     {m.version}
                   </span>
-                  <span className="flex items-center gap-[6px] text-[13px] leading-normal text-muted">
+                  <span className="hidden items-center gap-[6px] text-[13px] leading-normal text-muted sm:flex">
                     <Icon name="message" />
                     {m.comments}
                   </span>
                   <StatusChip status={m.status} />
-                  <span className="flex h-[44px] items-center gap-[8px] px-[18px] text-[14.5px] font-semibold text-teal-700">
+                  <span className="flex h-[44px] items-center gap-[8px] text-[14.5px] font-semibold text-teal-700 sm:px-[18px]">
                     <Icon name="chevronRight" />
-                    Open
+                    <span className="hidden sm:inline">Open</span>
                   </span>
                 </Link>
               );
@@ -146,7 +146,7 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
           </Card>
 
           <div className="flex w-full shrink-0 flex-col gap-[28px] xl:w-[340px]">
-            <Card className="flex flex-col gap-[16px] p-[24px]">
+            <Card className="flex flex-col gap-[16px] p-[18px] sm:p-[24px]">
               <SectionHead title="Recent activity" />
               <div className="flex flex-col gap-[16px]">
                 {activity.map((a) => (
@@ -160,7 +160,7 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
                 ))}
               </div>
             </Card>
-            <Card className="flex flex-col gap-[14px] p-[24px]">
+            <Card className="flex flex-col gap-[14px] p-[18px] sm:p-[24px]">
               <SectionHead title="Files" />
               {[
                 ["Versions uploaded", "9"],

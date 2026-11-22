@@ -92,14 +92,14 @@ export default function ReviewSubmissionPage() {
                 </button>
               </div>
             </div>
-            <div className="neu-inset flex justify-center overflow-hidden rounded-[20px] p-[28px]">
+            <div className="neu-inset flex justify-center overflow-hidden rounded-[20px] p-[10px] sm:p-[28px]">
               <div
-                className="flex w-[520px] max-w-full origin-top flex-col items-start gap-[12px] rounded-[6px] bg-paper p-[40px] drop-shadow-[0_6px_9px_rgba(102,128,135,0.18)] transition-transform"
+                className="flex w-[520px] max-w-full origin-top flex-col items-start gap-[12px] rounded-[6px] bg-paper p-[18px] sm:p-[40px] drop-shadow-[0_6px_9px_rgba(102,128,135,0.18)] transition-transform"
                 style={{ transform: `scale(${zoom})` }}
               >
                 <h3 className="font-display text-[17px] leading-normal font-semibold whitespace-pre text-teal-900">{"3.2  Model comparison"}</h3>
                 {lines([440, 430, 445, 300])}
-                <div className="overflow-hidden rounded-[6px] border border-line">
+                <div className="max-w-full overflow-x-auto rounded-[6px] border border-line">
                   {[
                     ["Model", "RMSE", "MAE", "R²"],
                     ["Linear regression", "0.41", "0.33", "0.71"],
@@ -134,7 +134,7 @@ export default function ReviewSubmissionPage() {
 
           {/* Review panel */}
           <div className="flex w-full shrink-0 flex-col gap-[20px] xl:w-[410px]">
-            <Card className="flex flex-col gap-[16px] p-[24px]">
+            <Card className="flex flex-col gap-[16px] p-[18px] sm:p-[24px]">
               <div className="flex items-center gap-[12px]">
                 <Avatar initials="AK" size="md" />
                 <div className="flex flex-col gap-px leading-normal whitespace-nowrap">
@@ -142,7 +142,7 @@ export default function ReviewSubmissionPage() {
                   <span className="text-[12.5px] text-muted">MSCS-2025-041 · submitted 2 days ago</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="text-[13.5px] leading-normal text-muted">Version</span>
                 <Segmented
                   value={version}
@@ -161,7 +161,7 @@ export default function ReviewSubmissionPage() {
               </div>
             </Card>
 
-            <Card className="flex flex-col gap-[14px] p-[24px]">
+            <Card className="flex flex-col gap-[14px] p-[18px] sm:p-[24px]">
               <SectionHead title="Comments" action={<span className="text-[13.5px] font-semibold text-teal-700">{comments.length + 2}</span>} />
               {comments.map((c, i) => (
                 <div key={i} className="flex items-start gap-[10px]">
@@ -189,7 +189,7 @@ export default function ReviewSubmissionPage() {
               </div>
             </Card>
 
-            <Card className="flex flex-col gap-[14px] p-[24px] shadow-neu-lg">
+            <Card className="flex flex-col gap-[14px] p-[18px] sm:p-[24px] shadow-neu-lg">
               <h2 className="text-[15px] leading-normal font-semibold text-teal-900">Your decision on Implementation</h2>
               {decision ? (
                 <div className="flex items-center justify-between gap-3">

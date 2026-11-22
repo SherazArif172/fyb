@@ -48,6 +48,12 @@ export function Tour({ steps }: { steps: TourStep[] }) {
     const el = document.querySelector<HTMLElement>(`[data-tour="${steps[i]?.target}"]`);
     if (!el) return setRect(null);
     const r = el.getBoundingClientRect();
+    // target not on screen (e.g. the sidebar is collapsed on mobile) -> skip this step
+    if (r.width === 0 || r.right <= 0) {
+      if (i < steps.length - 1) setI(i + 1);
+      else setOpen(false);
+      return;
+    }
     setRect({ top: r.top + window.scrollY, left: r.left + window.scrollX, width: r.width, height: r.height });
   }, [i, steps]);
 
@@ -67,7 +73,12 @@ export function Tour({ steps }: { steps: TourStep[] }) {
   if (!open || !rect) return null;
   const step = steps[i];
   const pad = 16;
-  const ring = { top: rect.top - pad, left: rect.left - pad, width: rect.width + pad * 2, height: rect.height + pad * 2 };
+  const vw = document.documentElement.clientWidth;
+  const ringLeft = Math.max(4, rect.left - pad);
+  const ring = { top: rect.top - pad, left: ringLeft, width: Math.min(rect.width + pad * 2, vw - ringLeft - 4), height: rect.height + pad * 2 };
+  const tipW = Math.min(380, vw - 24);
+  const tipLeft = Math.max(12, Math.min(ring.left + 40, vw - tipW - 12));
+  const arrowLeft = Math.max(20, Math.min(ring.left + 60 - tipLeft, tipW - 40));
   const close = () => setOpen(false);
 
   return (
@@ -82,9 +93,9 @@ export function Tour({ steps }: { steps: TourStep[] }) {
         }}
       />
       {/* Tooltip */}
-      <div className="absolute w-[380px] transition-all duration-300" style={{ top: ring.top + ring.height + 24, left: ring.left + 40 }}>
-        <span className="absolute -top-[9px] left-[60px] size-[18px] rotate-45 rounded-[3px] bg-ice" />
-        <div className="relative flex flex-col gap-[14px] rounded-[24px] bg-ice p-[24px] shadow-neu-lg">
+      <div className="absolute transition-all duration-300" style={{ top: ring.top + ring.height + 24, left: tipLeft, width: tipW }}>
+        <span className="absolute -top-[9px] size-[18px] rotate-45 rounded-[3px] bg-ice" style={{ left: arrowLeft }} />
+        <div className="relative flex flex-col gap-[14px] rounded-[24px] bg-ice p-[20px] shadow-neu-lg sm:p-[24px]">
           <div className="flex items-center justify-between">
             <p className="text-[11px] leading-normal font-semibold tracking-[0.88px] text-peach-700">
               STEP {i + 1} OF {steps.length}
@@ -95,7 +106,7 @@ export function Tour({ steps }: { steps: TourStep[] }) {
           </div>
           <h3 className="font-display text-[22px] leading-normal font-semibold text-teal-900">{step.title}</h3>
           <p className="text-[14px] leading-[21px] text-muted">{step.body}</p>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-y-3">
             <div className="flex items-center gap-[6px]">
               {steps.map((_, d) => (
                 <span key={d} className={cn("h-[8px] rounded-[4px] transition-all", d === i ? "w-[20px] bg-teal-700" : "w-[8px] bg-line")} />

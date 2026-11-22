@@ -26,7 +26,7 @@ export default function HomePage() {
   return (
     <PublicLayout>
       {/* Hero */}
-      <section className="flex w-full flex-col items-center gap-[60px] px-6 pt-[56px] pb-[72px] lg:flex-row lg:px-[80px]">
+      <section className="flex w-full flex-col items-center gap-[40px] px-4 sm:px-6 pt-[24px] pb-[56px] sm:pt-[56px] sm:pb-[72px] lg:gap-[60px] lg:flex-row lg:px-[80px]">
         <div className="flex min-w-0 flex-1 flex-col items-start gap-[24px]">
           <span className="inline-flex items-center gap-[8px] rounded-full bg-ice px-[14px] py-[7px] shadow-neu-sm">
             <Icon name="sparkles" className="text-peach-700" />
@@ -41,7 +41,7 @@ export default function HomePage() {
           </p>
 
           <form action="/explore" className="flex w-full flex-wrap items-center gap-[10px] rounded-[22px] bg-ice p-[10px] shadow-neu">
-            <label className="neu-inset flex h-[52px] min-w-[220px] flex-1 items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
+            <label className="neu-inset flex h-[52px] w-full min-w-0 sm:w-auto sm:min-w-[220px] sm:flex-1 items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
               <Icon name="search" className="shrink-0 text-muted" />
               <input
                 name="q"
@@ -49,8 +49,8 @@ export default function HomePage() {
                 className="h-full min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none"
               />
             </label>
-            <label className="neu-inset relative flex h-[52px] items-center gap-[10px] rounded-[14px] border border-field px-[16px]">
-              <select name="area" className="appearance-none bg-transparent pr-[26px] text-[14px] font-medium text-ink outline-none">
+            <label className="neu-inset relative flex h-[52px] flex-1 items-center gap-[10px] rounded-[14px] border border-field px-[16px] sm:flex-none">
+              <select name="area" className="w-full appearance-none bg-transparent pr-[26px] text-[14px] font-medium text-ink outline-none">
                 <option>All areas</option>
                 {popular.map((a) => (
                   <option key={a}>{a}</option>
@@ -74,14 +74,14 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="flex gap-[40px] leading-normal whitespace-nowrap">
+          <div className="flex gap-[24px] leading-normal whitespace-nowrap sm:gap-[40px]">
             {[
               ["128", "research projects"],
               ["24", "supervisors"],
               ["25", "published theses"],
             ].map(([n, l]) => (
               <div key={l} className="flex flex-col">
-                <span className="font-display text-[30px] font-semibold text-teal-900">{n}</span>
+                <span className="font-display text-[26px] font-semibold text-teal-900 sm:text-[30px]">{n}</span>
                 <span className="text-[13px] text-muted">{l}</span>
               </div>
             ))}
@@ -97,10 +97,10 @@ export default function HomePage() {
       </section>
 
       {/* Featured */}
-      <section className="flex w-full flex-col gap-[28px] px-6 pb-[72px] lg:px-[80px]">
+      <section className="flex w-full flex-col gap-[24px] px-4 sm:gap-[28px] sm:px-6 pb-[56px] sm:pb-[72px] lg:px-[80px]">
         <div className="flex w-full flex-wrap items-start justify-between gap-4">
           <div className="flex flex-col gap-[6px] leading-normal">
-            <h2 className="font-display text-[34px] font-semibold tracking-[-0.34px] text-teal-900">Featured projects</h2>
+            <h2 className="font-display text-[28px] font-semibold tracking-[-0.34px] text-teal-900 sm:text-[34px]">Featured projects</h2>
             <p className="text-[15px] text-muted">Chosen by the admin from this year’s published theses</p>
           </div>
           <Link href="/explore" className="flex items-center gap-[6px] text-[14px] leading-normal font-semibold text-teal-700 hover:underline">
@@ -116,11 +116,11 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="flex w-full flex-col gap-[28px] px-6 pb-[80px] lg:px-[80px]">
-        <h2 className="font-display text-[34px] leading-normal font-semibold tracking-[-0.34px] text-teal-900">How it works</h2>
+      <section id="how-it-works" className="flex w-full flex-col gap-[28px] px-4 sm:px-6 pb-[80px] lg:px-[80px]">
+        <h2 className="font-display text-[28px] leading-normal font-semibold tracking-[-0.34px] text-teal-900 sm:text-[34px]">How it works</h2>
         <div className="grid w-full grid-cols-1 gap-[28px] md:grid-cols-3">
           {steps.map((s) => (
-            <div key={s.n} className="flex flex-col items-start gap-[16px] rounded-[24px] bg-ice p-[28px] shadow-neu">
+            <div key={s.n} className="flex flex-col items-start gap-[16px] rounded-[24px] bg-ice p-[22px] shadow-neu sm:p-[28px]">
               <div className="flex w-full items-center justify-between">
                 <span className="flex size-[52px] items-center justify-center rounded-[16.64px] bg-ice text-teal-700 shadow-neu-sm">
                   <Icon name={s.icon} />

@@ -11,7 +11,7 @@ import { Drawer } from "@/components/ui/Drawer";
 import { fieldClasses, SearchInput } from "@/components/ui/Form";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Segmented } from "@/components/ui/Segmented";
-import { Cell, TableHead } from "@/components/ui/Table";
+import { Cell, Row, TableHead, TableScroll } from "@/components/ui/Table";
 
 type UserStatus = "Active" | "Blocked" | "Invited";
 type User = { initials: string; name: string; email: string; dept: string; projects: number; status: UserStatus; joined: string };
@@ -84,7 +84,7 @@ export default function UsersPage() {
               { value: "admins", label: "Admins 2" },
             ]}
           />
-          <div className="flex items-center gap-[12px]">
+          <div className="flex w-full flex-wrap items-center gap-[12px] sm:w-auto">
             <SearchInput value={q} onChange={setQ} placeholder="Search by name or email" width={260} />
             {tab === "supervisors" && (
               <Button icon="plus" onClick={() => setDrawer(true)}>
@@ -94,10 +94,11 @@ export default function UsersPage() {
           </div>
         </div>
 
-        <Card className="flex flex-col p-[24px]">
+        <Card className="flex flex-col p-[18px] sm:p-[24px]">
+          <TableScroll min={900}>
           <TableHead cols={[{ label: "USER" }, { label: "DEPARTMENT", w: 170 }, { label: "PROJECTS", w: 90 }, { label: "STATUS", w: 120 }, { label: "JOINED", w: 110 }, { label: "", w: 96 }]} />
           {list.map((u) => (
-            <div key={u.email} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[14px]">
+            <Row key={u.email}>
               <Cell className="gap-[10px]">
                 <Avatar initials={u.initials} />
                 <span className="flex flex-col leading-normal whitespace-nowrap">
@@ -105,19 +106,19 @@ export default function UsersPage() {
                   <span className="text-[12px] text-muted">{u.email}</span>
                 </span>
               </Cell>
-              <Cell w={170} className="text-[13.5px] leading-normal whitespace-nowrap text-ink">
+              <Cell label="Department" w={170} className="text-[13.5px] leading-normal whitespace-nowrap text-ink">
                 {u.dept}
               </Cell>
-              <Cell w={90} className="text-[13.5px] leading-normal font-semibold text-ink">
+              <Cell label="Projects" w={90} className="text-[13.5px] leading-normal font-semibold text-ink">
                 {u.projects}
               </Cell>
-              <Cell w={120}>
+              <Cell label="Status" w={120}>
                 <span className={cn("flex items-center gap-[6px] rounded-full px-[10px] py-[5px] text-[12px] leading-normal font-semibold", pill[u.status])}>
                   <span className={cn("size-[7px] rounded-full", dot[u.status])} />
                   {u.status}
                 </span>
               </Cell>
-              <Cell w={110} className="text-[13px] leading-normal whitespace-nowrap text-muted">
+              <Cell label="Joined" w={110} className="text-[13px] leading-normal whitespace-nowrap text-muted">
                 {u.joined}
               </Cell>
               <Cell w={96} className="gap-[14px]">
@@ -136,8 +137,9 @@ export default function UsersPage() {
                   <Icon name="trash" />
                 </button>
               </Cell>
-            </div>
+            </Row>
           ))}
+          </TableScroll>
         </Card>
       </PageBody>
 

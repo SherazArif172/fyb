@@ -99,7 +99,7 @@ export function VersionRow({
   active?: boolean;
 }) {
   return (
-    <div className={cn("flex w-full items-start gap-[16px] px-[18px] py-[16px]", active ? "rounded-[14px] bg-teal-50" : "border-b border-line")}>
+    <div className={cn("flex w-full flex-wrap items-start gap-[12px] px-[12px] py-[14px] sm:flex-nowrap sm:gap-[16px] sm:px-[18px] sm:py-[16px]", active ? "rounded-[14px] bg-teal-50" : "border-b border-line")}>
       <span
         className={cn(
           "flex size-[44px] shrink-0 items-center justify-center rounded-[14.08px] bg-ice shadow-neu-sm",
@@ -108,9 +108,9 @@ export function VersionRow({
       >
         <Icon name={icon} />
       </span>
-      <div className="flex min-w-0 flex-1 flex-col gap-[5px]">
+      <div className="flex min-w-0 flex-1 basis-[180px] flex-col gap-[5px]">
         <div className="flex flex-wrap items-center gap-[8px]">
-          <span className="text-[14.5px] leading-normal font-semibold text-ink">{name}</span>
+          <span className="text-[14.5px] leading-normal font-semibold break-all text-ink sm:break-normal">{name}</span>
           <span
             className={cn(
               "rounded-full px-[8px] py-[2px] text-[11.5px] leading-normal font-semibold",
@@ -124,7 +124,7 @@ export function VersionRow({
         <span className="text-[12.5px] leading-normal text-muted">{meta}</span>
         <span className="max-w-[460px] text-[13px] leading-normal text-ink italic">{note}</span>
       </div>
-      <div className="flex shrink-0 items-center gap-[8px]">
+      <div className="ml-auto flex shrink-0 items-center gap-[8px]">
         <button type="button" aria-label="Preview" className="flex size-[36px] items-center justify-center rounded-[11.52px] bg-ice text-teal-700 shadow-neu-sm">
           <Icon name="eye" />
         </button>

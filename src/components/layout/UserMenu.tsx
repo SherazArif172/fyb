@@ -79,10 +79,10 @@ export function UserChip({ role, defaultOpen = false }: { role: Role; defaultOpe
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex items-center gap-[10px] rounded-full bg-ice py-[6px] pr-[14px] pl-[6px] shadow-neu-sm"
+        className="flex items-center gap-[10px] rounded-full bg-ice py-[6px] pr-[10px] pl-[6px] shadow-neu-sm sm:pr-[14px]"
       >
         <Avatar initials={user.initials} size="sm" />
-        <span className="flex flex-col items-start leading-normal whitespace-nowrap">
+        <span className="hidden flex-col items-start leading-normal whitespace-nowrap sm:flex">
           <span className="text-[13.5px] font-semibold text-ink">{user.name}</span>
           <span className="text-[12px] text-muted">{user.role}</span>
         </span>

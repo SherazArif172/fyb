@@ -60,7 +60,7 @@ export default function StudentDashboard() {
       <TopBar role="student" title="Good evening, Ayesha" subtitle="Saturday, 21 November 2026 · 1 milestone due this week" />
       <PageBody className="pt-[8px] pb-[48px]">
         {/* Stats */}
-        <div data-tour="stats" className="grid grid-cols-2 gap-[24px] xl:grid-cols-4">
+        <div data-tour="stats" className="grid grid-cols-2 gap-[14px] sm:gap-[24px] xl:grid-cols-4">
           <StatCard icon="folder" value="2" label="Active projects" trend="+1 this month" />
           <StatCard icon="checkCircle" value="6/12" label="Milestones completed" trend="50%" />
           <StatCard icon="inbox" value="1" label="Waiting for review" trend="Implementation" />
@@ -69,7 +69,7 @@ export default function StudentDashboard() {
 
         {/* Row 2 */}
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card data-tour="current" className="flex min-w-0 flex-1 flex-col gap-[20px] p-[28px]">
+          <Card data-tour="current" className="flex min-w-0 flex-1 flex-col gap-[20px] p-[20px] sm:p-[28px]">
             <div className="flex items-start justify-between gap-4">
               <div className="flex flex-col gap-[6px]">
                 <Eyebrow>CURRENT PROJECT</Eyebrow>
@@ -128,7 +128,7 @@ export default function StudentDashboard() {
             </div>
           </Card>
 
-          <Card data-tour="deadlines" className="flex w-full shrink-0 flex-col gap-[16px] p-[24px] xl:w-[360px]">
+          <Card data-tour="deadlines" className="flex w-full shrink-0 flex-col gap-[16px] p-[18px] sm:p-[24px] xl:w-[360px]">
             <SectionHead title="Upcoming deadlines" link="View all" href="/student/projects" />
             {deadlines.map((d) => (
               <div key={d.day + d.month} className="flex items-center gap-[14px]">
@@ -145,7 +145,7 @@ export default function StudentDashboard() {
 
         {/* Row 3 */}
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card data-tour="feedback" className="flex min-w-0 flex-1 flex-col gap-[18px] p-[24px]">
+          <Card data-tour="feedback" className="flex min-w-0 flex-1 flex-col gap-[18px] p-[18px] sm:p-[24px]">
             <SectionHead title="Latest feedback" link="See all" href="/student/notifications" />
             {feedback.map((f, i) => (
               <div key={f.when} className="flex flex-col gap-[18px]">
@@ -168,7 +168,7 @@ export default function StudentDashboard() {
             ))}
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[6px] p-[24px] xl:w-[420px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[6px] p-[18px] sm:p-[24px] xl:w-[420px]">
             <SectionHead title="My projects" link="View all" href="/student/projects" />
             {myProjects.map((p) => (
               <Link
@@ -176,7 +176,7 @@ export default function StudentDashboard() {
                 href="/student/projects/crop-yield"
                 className="flex flex-col gap-[10px] border-b border-line px-[16px] py-[14px] transition hover:bg-teal-50/50"
               >
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
                   <div className="flex flex-col gap-[2px] leading-normal">
                     <span className="max-w-[165px] text-[13.5px] font-semibold text-ink">{p.title}</span>
                     <span className="text-[12px] whitespace-nowrap text-muted">{p.area}</span>

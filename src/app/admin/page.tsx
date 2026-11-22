@@ -10,7 +10,7 @@ import { Card, StatCard } from "@/components/ui/Card";
 import { Donut } from "@/components/ui/Donut";
 import { SectionHead } from "@/components/ui/Section";
 import { StatusChip } from "@/components/ui/StatusChip";
-import { Cell, TableHead } from "@/components/ui/Table";
+import { Cell, Row, TableHead, TableScroll } from "@/components/ui/Table";
 
 const months = [
   { m: "Jun", c: 15.2, p: 117.8, w: 8 },
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
     <>
       <TopBar role="admin" title="Good evening, Sana" subtitle="System overview · Saturday, 21 November 2026" />
       <PageBody className="pt-[8px] pb-[48px]">
-        <div className="grid grid-cols-2 gap-[24px] xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-[14px] sm:gap-[24px] xl:grid-cols-4">
           <StatCard icon="folder" value="128" label="Total projects" trend="+12 this month" />
           <StatCard icon="users" value="342" label="Students" trend="+28 this term" />
           <StatCard icon="userCheck" value="24" label="Supervisors" trend="2 at full load" />
@@ -96,30 +96,30 @@ export default function AdminDashboard() {
         </div>
 
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card className="flex min-w-0 flex-1 flex-col gap-[18px] p-[24px] xl:self-start">
+          <Card className="flex min-w-0 flex-1 flex-col gap-[18px] p-[18px] sm:p-[24px] xl:self-start">
             <SectionHead
               title="Projects by status"
               action={
-                <div className="flex items-center gap-[14px] font-normal">
+                <div className="hidden items-center gap-[14px] font-normal sm:flex">
                   <Legend color="var(--teal-700)" label="Completed" />
                   <Legend color="var(--teal-200)" label="In progress" />
                   <Legend color="var(--peach-500)" label="Waiting" />
                 </div>
               }
             />
-            <div className="neu-inset flex flex-col gap-[10px] rounded-[18px] p-[20px]">
+            <div className="neu-inset flex flex-col gap-[10px] rounded-[18px] p-[14px] sm:p-[20px]">
               <div className="flex h-[200px] items-end justify-between">
                 {months.map((g) => (
-                  <div key={g.m} className="flex w-[66px] items-end justify-center gap-[6px]" title={g.m}>
-                    <span className="w-[18px] rounded-t-[6px] bg-teal-700" style={{ height: g.c }} />
-                    <span className="w-[18px] rounded-t-[6px] bg-teal-200" style={{ height: g.p }} />
-                    <span className="w-[18px] rounded-t-[6px] bg-peach-500" style={{ height: g.w }} />
+                  <div key={g.m} className="flex flex-1 items-end justify-center gap-[3px] sm:gap-[6px]" title={g.m}>
+                    <span className="w-[9px] rounded-t-[6px] bg-teal-700 sm:w-[18px]" style={{ height: g.c }} />
+                    <span className="w-[9px] rounded-t-[6px] bg-teal-200 sm:w-[18px]" style={{ height: g.p }} />
+                    <span className="w-[9px] rounded-t-[6px] bg-peach-500 sm:w-[18px]" style={{ height: g.w }} />
                   </div>
                 ))}
               </div>
               <div className="flex justify-between text-center text-[12px] leading-normal font-medium text-muted">
                 {months.map((g) => (
-                  <span key={g.m} className="w-[66px]">
+                  <span key={g.m} className="flex-1">
                     {g.m}
                   </span>
                 ))}
@@ -127,7 +127,7 @@ export default function AdminDashboard() {
             </div>
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[18px] p-[24px] xl:w-[360px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[18px] p-[18px] sm:p-[24px] xl:w-[360px]">
             <SectionHead title="By research area" />
             <div className="flex justify-center">
               <Donut size={180} value="128" label="projects" segments={areas} />
@@ -147,20 +147,21 @@ export default function AdminDashboard() {
         </div>
 
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card className="flex min-w-0 flex-1 flex-col p-[24px]">
+          <Card className="flex min-w-0 flex-1 flex-col p-[18px] sm:p-[24px]">
             <SectionHead title="Needs a supervisor" link="View all 7" href="/admin/projects" />
+            <TableScroll min={640}>
             <TableHead cols={[{ label: "STUDENT", w: 180 }, { label: "PROJECT" }, { label: "CREATED", w: 90 }, { label: "", w: 110 }]} />
             {needs.map((n) => (
-              <div key={n.name} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[14px]">
+              <Row key={n.name}>
                 <Cell w={180} className="gap-[10px]">
                   <Avatar initials={n.initials} />
                   <span className="text-[13.5px] leading-normal font-semibold whitespace-nowrap text-ink">{n.name}</span>
                 </Cell>
-                <Cell className="flex-col items-start gap-[2px] leading-normal">
+                <Cell label="Project" className="flex-col items-start gap-[2px] leading-normal">
                   <span className="text-[13.5px] font-semibold text-ink">{n.project}</span>
                   <span className="text-[12px] text-muted">{n.area}</span>
                 </Cell>
-                <Cell w={90} className="text-[13px] leading-normal whitespace-nowrap text-muted">
+                <Cell label="Created" w={90} className="text-[13px] leading-normal whitespace-nowrap text-muted">
                   {n.created}
                 </Cell>
                 <Cell w={110}>
@@ -168,11 +169,12 @@ export default function AdminDashboard() {
                     Assign
                   </Button>
                 </Cell>
-              </div>
+              </Row>
             ))}
+            </TableScroll>
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[14px] p-[24px] xl:w-[400px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[14px] p-[18px] sm:p-[24px] xl:w-[400px]">
             <SectionHead title="Publish requests" link="2 pending" href="/admin/publish-requests" />
             {requests.map((r) => (
               <PublishRequest key={r.title} r={r} />

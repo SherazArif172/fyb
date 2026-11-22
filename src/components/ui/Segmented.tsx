@@ -20,7 +20,7 @@ export function Segmented<T extends string>({
     typeof o === "string" ? { value: o, label: o } : o,
   );
   return (
-    <div className={cn("neu-inset flex gap-[4px] rounded-[16px] p-[5px]", className)} role="tablist">
+    <div className={cn("neu-inset flex max-w-full gap-[4px] overflow-x-auto rounded-[16px] p-[5px] [scrollbar-width:none]", className)} role="tablist">
       {opts.map((o) => {
         const active = o.value === value;
         return (

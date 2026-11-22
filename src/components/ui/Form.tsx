@@ -278,7 +278,7 @@ export function FilterSelect({
       <select
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
-        className="appearance-none bg-transparent pr-[30px] text-[13.5px] font-medium text-ink outline-none"
+        className="w-full min-w-0 appearance-none truncate bg-transparent pr-[30px] text-[13.5px] font-medium text-ink outline-none"
       >
         {options.map((o) => (
           <option key={o}>{o}</option>
@@ -309,7 +309,7 @@ export function SearchInput({
         "neu-inset flex h-[44px] items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]",
         className,
       )}
-      style={{ width }}
+      style={{ width: "100%", maxWidth: width }}
     >
       <Icon name="search" className="shrink-0 text-muted" />
       <input

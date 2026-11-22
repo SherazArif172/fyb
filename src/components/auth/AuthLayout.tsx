@@ -7,7 +7,7 @@ import { ProgressDial } from "@/components/ui/Progress";
 /* Figma: Brand Panel (3:71) — 620px, px56 py48 */
 function BrandPanel({ headline = "See exactly how far your research has come." }: { headline?: string }) {
   return (
-    <aside className="sticky top-0 hidden h-screen min-h-[900px] w-[620px] shrink-0 flex-col bg-ice px-[56px] py-[48px] lg:flex">
+    <aside className="sticky top-0 hidden h-screen min-h-[900px] w-[620px] shrink-0 flex-col bg-ice px-[56px] py-[48px] xl:flex">
       <Logo variant="inline" markSize={40} />
       <div className="flex flex-1 flex-col justify-center gap-[48px]">
         <div className="pl-[40px]">

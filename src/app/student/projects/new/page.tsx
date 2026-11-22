@@ -57,7 +57,7 @@ export default function NewProjectPage() {
       />
       <PageBody className="pt-[8px] pb-[48px]">
         <div className="flex flex-col gap-[28px] xl:flex-row xl:items-start">
-          <Card className="flex min-w-0 flex-1 flex-col gap-[24px] p-[32px]">
+          <Card className="flex min-w-0 flex-1 flex-col gap-[24px] p-[20px] sm:p-[32px]">
             <h2 className="text-[17px] leading-normal font-semibold text-teal-900">Project details</h2>
 
             <label className="flex flex-col gap-[8px]">
@@ -137,9 +137,9 @@ export default function NewProjectPage() {
 
             <div className="flex flex-col gap-[12px]">
               {milestones.map((m, i) => (
-                <div key={i} className="flex items-center gap-[12px]">
-                  <Icon name="grip" className="shrink-0 cursor-grab text-muted" />
-                  <div className={cn(fieldClasses(), "h-[46px] flex-1 px-[16px] focus-within:px-[15px]")}>
+                <div key={i} className="flex items-center gap-[8px] sm:gap-[12px]">
+                  <Icon name="grip" className="hidden shrink-0 cursor-grab text-muted sm:block" />
+                  <div className={cn(fieldClasses(), "h-[46px] min-w-0 flex-1 px-[12px] focus-within:px-[11px] sm:px-[16px] sm:focus-within:px-[15px]")}>
                     <input
                       value={m.name}
                       placeholder="Milestone name"
@@ -147,8 +147,8 @@ export default function NewProjectPage() {
                       className="h-full min-w-0 flex-1 bg-transparent text-[14.5px] text-ink outline-none"
                     />
                   </div>
-                  <div className={cn(fieldClasses(), "h-[46px] w-[190px] px-[16px] focus-within:px-[15px]")}>
-                    <Icon name="calendar" className="shrink-0 text-muted" />
+                  <div className={cn(fieldClasses(), "h-[46px] w-[148px] shrink-0 px-[10px] focus-within:px-[9px] sm:w-[190px] sm:px-[16px] sm:focus-within:px-[15px]")}>
+                    <Icon name="calendar" className="hidden shrink-0 text-muted sm:block" />
                     <input
                       type="date"
                       value={m.due}
@@ -183,7 +183,7 @@ export default function NewProjectPage() {
             </div>
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[20px] p-[28px] xl:w-[340px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[20px] p-[20px] sm:p-[28px] xl:w-[340px]">
             <h2 className="font-display text-[20px] leading-normal font-semibold text-teal-900">What happens next</h2>
             {nextSteps.map((s, i) => (
               <div key={s.title} className="flex items-start gap-[14px]">

@@ -10,6 +10,7 @@ import { Donut } from "@/components/ui/Donut";
 import { ProgressBar } from "@/components/ui/Progress";
 import { SectionHead } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
+import { Cell, Row, TableHead, TableScroll } from "@/components/ui/Table";
 
 const completion = [
   { student: "Ayesha Khan", project: "Crop Yield Prediction using ML", value: 50 },
@@ -57,7 +58,7 @@ export default function SupervisorDashboard() {
         subtitle="Saturday, 21 November 2026 · 3 submissions are waiting for your review"
       />
       <PageBody className="pt-[8px] pb-[48px]">
-        <div className="grid grid-cols-2 gap-[24px] xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-[14px] sm:gap-[24px] xl:grid-cols-4">
           <StatCard icon="folder" value="6" label="Assigned projects" trend="+1 this week" />
           <StatCard icon="inbox" value="3" label="Waiting for your review" trend="2 new" />
           <StatCard icon="alert" iconClassName="text-danger" value="2" label="Overdue milestones" trend="Action needed" />
@@ -65,13 +66,13 @@ export default function SupervisorDashboard() {
         </div>
 
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card className="flex min-w-0 flex-1 flex-col gap-[18px] p-[24px]">
+          <Card className="flex min-w-0 flex-1 flex-col gap-[18px] p-[18px] sm:p-[24px]">
             <SectionHead title="Milestone completion by project" link="This semester" />
             {completion.map((r) => (
-              <div key={r.student} className="flex items-center gap-[16px]">
-                <div className="flex w-[230px] shrink-0 flex-col leading-normal">
+              <div key={r.student} className="flex items-center gap-[10px] sm:gap-[16px]">
+                <div className="flex w-[118px] shrink-0 flex-col leading-normal sm:w-[230px]">
                   <span className="text-[13.5px] font-semibold text-ink">{r.student}</span>
-                  <span className="max-w-[220px] text-[12px] text-muted">{r.project}</span>
+                  <span className="max-w-[220px] truncate text-[12px] text-muted sm:whitespace-normal">{r.project}</span>
                 </div>
                 <ProgressBar value={r.value} height={14} className="flex-1" />
                 <span className={cn("w-[44px] text-right text-[13px] leading-normal font-semibold", r.behind ? "text-danger" : "text-teal-900")}>
@@ -81,7 +82,7 @@ export default function SupervisorDashboard() {
             ))}
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[20px] p-[24px] xl:w-[360px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[20px] p-[18px] sm:p-[24px] xl:w-[360px]">
             <SectionHead title="Overall status" />
             <div className="flex justify-center">
               <Donut value="24" label="milestones" segments={status} />
@@ -101,33 +102,32 @@ export default function SupervisorDashboard() {
         </div>
 
         <div className="flex flex-col gap-[28px] xl:flex-row">
-          <Card className="flex min-w-0 flex-1 flex-col p-[24px]">
+          <Card className="flex min-w-0 flex-1 flex-col p-[18px] sm:p-[24px]">
             <SectionHead title="Waiting for your review" link="View all" href="/supervisor/reviews" />
-            <div className="flex gap-[16px] px-[16px] pt-[4px] pb-[10px] text-[11px] leading-normal font-semibold tracking-[0.66px] text-placeholder">
-              <span className="w-[170px]">STUDENT</span>
-              <span className="flex-1">PROJECT</span>
-              <span className="w-[150px]">MILESTONE</span>
-              <span className="w-[96px]" />
-            </div>
+            <TableScroll min={620}>
+            <TableHead cols={[{ label: "STUDENT", w: 170 }, { label: "PROJECT" }, { label: "MILESTONE", w: 150 }, { label: "", w: 96 }]} />
             {waiting.map((w) => (
-              <div key={w.name} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[12px]">
-                <span className="flex w-[170px] items-center gap-[10px]">
+              <Row key={w.name} className="md:py-[12px]">
+                <Cell w={170} className="gap-[10px]">
                   <Avatar initials={w.initials} />
                   <span className="text-[13.5px] leading-normal font-semibold text-ink">{w.name}</span>
-                </span>
-                <span className="min-w-0 flex-1 text-[13.5px] leading-normal font-medium text-ink">{w.project}</span>
-                <span className="flex w-[150px] flex-col gap-[2px] leading-normal whitespace-nowrap">
+                </Cell>
+                <Cell label="Project" className="text-[13.5px] leading-normal font-medium text-ink">
+                  {w.project}
+                </Cell>
+                <Cell w={150} label="Milestone" className="flex-col items-start gap-[2px] leading-normal whitespace-nowrap">
                   <span className="text-[13.5px] text-ink">{w.milestone}</span>
                   <span className="text-[12px] font-medium text-peach-700">{w.meta}</span>
-                </span>
-                <span className="w-[96px]">
+                </Cell>
+                <Cell w={96}>
                   <ButtonLink href="/supervisor/reviews/crop-yield-implementation">Review</ButtonLink>
-                </span>
-              </div>
+                </Cell>
+              </Row>
             ))}
+            </TableScroll>
           </Card>
 
-          <Card className="flex w-full shrink-0 flex-col gap-[14px] p-[24px] xl:w-[360px]">
+          <Card className="flex w-full shrink-0 flex-col gap-[14px] p-[18px] sm:p-[24px] xl:w-[360px]">
             <SectionHead title="Overdue milestones" />
             {overdue.map((o) => (
               <div key={o.name} className="flex flex-col gap-[10px] rounded-[18px] bg-ice p-[16px] shadow-neu-sm">

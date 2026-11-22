@@ -92,12 +92,12 @@ export function SettingsView({
       <div className="flex min-w-0 flex-1 flex-col gap-[28px]">
         <Card id="settings-profile" className="flex flex-col gap-[22px] p-[28px]">
           <SectionHead title="Profile" />
-          <div className="flex items-center gap-[20px]">
+          <div className="flex flex-wrap items-center gap-[20px]">
             <Avatar initials={user.initials} size="lg" />
-            <div className="flex flex-col gap-[4px]">
+            <div className="flex min-w-0 flex-col gap-[4px]">
               <span className="font-display text-[22px] leading-normal font-semibold text-teal-900">{user.name}</span>
               <span className="text-[13.5px] leading-normal text-muted">{user.subtitle}</span>
-              <div className="flex gap-[10px] pt-[8px]">
+              <div className="flex flex-wrap gap-[10px] pt-[8px]">
                 <Button variant="secondary" icon="upload">
                   Change photo
                 </Button>
@@ -149,12 +149,12 @@ export function SettingsView({
             <Button variant="secondary">Update password</Button>
           </Card>
 
-          <Card id="settings-appearance" className="flex w-full shrink-0 flex-col gap-[18px] p-[28px] xl:w-[360px]">
+          <Card id="settings-appearance" className="flex w-full shrink-0 flex-col gap-[18px] p-[20px] sm:p-[28px] xl:w-[360px]">
             <SectionHead title="Appearance" />
             <div className="flex items-center justify-between gap-3 rounded-[16px] bg-ice px-[16px] py-[14px] shadow-neu-sm">
-              <div className="flex items-center gap-[10px]">
-                <Icon name="moon" className="text-teal-700" />
-                <div className="flex flex-col gap-px leading-normal whitespace-nowrap">
+              <div className="flex min-w-0 items-center gap-[10px]">
+                <Icon name="moon" className="shrink-0 text-teal-700" />
+                <div className="flex min-w-0 flex-col gap-px leading-normal">
                   <span className="text-[14px] font-semibold text-ink">Dark mode</span>
                   <span className="text-[12px] text-muted">Easier on the eyes at night</span>
                 </div>
@@ -162,14 +162,14 @@ export function SettingsView({
               <Toggle on={theme === "dark"} onChange={(v) => setTheme(v ? "dark" : "light")} label="Dark mode" />
             </div>
             <div id="settings-notifications" className="flex items-center justify-between gap-3 rounded-[16px] bg-ice py-[14px] pl-[16px] shadow-neu-sm">
-              <div className="flex items-center gap-[10px]">
-                <Icon name="sparkles" className="text-teal-700" />
-                <div className="flex flex-col gap-px leading-normal whitespace-nowrap">
+              <div className="flex min-w-0 items-center gap-[10px]">
+                <Icon name="sparkles" className="shrink-0 text-teal-700" />
+                <div className="flex min-w-0 flex-col gap-px leading-normal">
                   <span className="text-[14px] font-semibold text-ink">Dashboard tour</span>
                   <span className="text-[12px] text-muted">Watch the 5-step walkthrough again</span>
                 </div>
               </div>
-              <Button variant="ghost" className="px-[14px]" onClick={() => router.push(tourHref)}>
+              <Button variant="ghost" className="shrink-0 px-[14px]" onClick={() => router.push(tourHref)}>
                 Start
               </Button>
             </div>

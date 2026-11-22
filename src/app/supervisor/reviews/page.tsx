@@ -4,7 +4,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { StatusChip } from "@/components/ui/StatusChip";
-import { Cell, TableHead } from "@/components/ui/Table";
+import { Cell, Row, TableHead, TableScroll } from "@/components/ui/Table";
 
 /* Not a separate Figma frame — composed from the dashboard's "Waiting for your review" table */
 const queue = [
@@ -18,27 +18,29 @@ export default function ReviewsPage() {
     <>
       <TopBar role="supervisor" title="Reviews" subtitle="3 submissions are waiting for your review" />
       <PageBody className="pt-[8px] pb-[48px]">
-        <Card className="flex flex-col p-[24px]">
+        <Card className="flex flex-col p-[18px] sm:p-[24px]">
+          <TableScroll min={780}>
           <TableHead cols={[{ label: "STUDENT", w: 200 }, { label: "PROJECT" }, { label: "MILESTONE", w: 170 }, { label: "STATUS", w: 150 }, { label: "", w: 96 }]} />
           {queue.map((w) => (
-            <div key={w.name} className="flex items-center gap-[16px] border-b border-line px-[16px] py-[12px]">
+            <Row key={w.name} className="md:py-[12px]">
               <Cell w={200} className="gap-[10px]">
                 <Avatar initials={w.initials} />
                 <span className="text-[13.5px] leading-normal font-semibold text-ink">{w.name}</span>
               </Cell>
-              <Cell className="text-[13.5px] leading-normal font-medium text-ink">{w.project}</Cell>
-              <Cell w={170} className="flex-col items-start gap-[2px] leading-normal whitespace-nowrap">
+              <Cell label="Project" className="text-[13.5px] leading-normal font-medium text-ink">{w.project}</Cell>
+              <Cell label="Milestone" w={170} className="flex-col items-start gap-[2px] leading-normal whitespace-nowrap">
                 <span className="text-[13.5px] text-ink">{w.milestone}</span>
                 <span className="text-[12px] font-medium text-peach-700">{w.meta}</span>
               </Cell>
-              <Cell w={150}>
+              <Cell label="Status" w={150}>
                 <StatusChip status="Under Review" />
               </Cell>
               <Cell w={96}>
                 <ButtonLink href="/supervisor/reviews/crop-yield-implementation">Review</ButtonLink>
               </Cell>
-            </div>
+            </Row>
           ))}
+          </TableScroll>
         </Card>
       </PageBody>
     </>

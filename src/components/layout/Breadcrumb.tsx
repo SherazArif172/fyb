@@ -4,7 +4,7 @@ import { Fragment } from "react";
 /* Top-bar subtitle breadcrumb: "My projects  /  New project" */
 export function Breadcrumb({ items }: { items: { label: string; href?: string }[] }) {
   return (
-    <span className="whitespace-pre">
+    <span className="whitespace-pre-wrap">
       {items.map((it, i) => (
         <Fragment key={it.label}>
           {i > 0 && "  /  "}

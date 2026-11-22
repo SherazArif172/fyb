@@ -58,7 +58,7 @@ function ProjectTile({ p }: { p: StudentProject }) {
         <span className="text-[12.5px] leading-normal font-semibold text-teal-900">{p.progress}%</span>
       </div>
       <Divider />
-      <div className="flex w-full items-center justify-between gap-3">
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-3 gap-y-2">
         <div className="flex flex-col gap-[2px] leading-normal whitespace-nowrap">
           <span className="text-[12.5px] font-semibold text-ink">{p.milestones}</span>
           <span className="text-[12px] text-muted">{p.updated}</span>
@@ -91,8 +91,8 @@ export default function MyProjectsPage() {
               { value: "published", label: `Published ${count("published")}` },
             ]}
           />
-          <div className="flex items-center gap-[14px]">
-            <label className="neu-inset flex h-[44px] w-[240px] items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
+          <div className="flex w-full items-center gap-[14px] sm:w-auto">
+            <label className="neu-inset flex h-[44px] min-w-0 flex-1 sm:w-[240px] sm:flex-none items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
               <Icon name="search" className="shrink-0 text-muted" />
               <input
                 value={q}

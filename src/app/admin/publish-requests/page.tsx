@@ -77,8 +77,8 @@ function Person({ name, initials, sub }: { name: string; initials: string; sub: 
 
 function Expanded({ r, onDone }: { r: Req; onDone: (s: "published" | "rejected") => void }) {
   return (
-    <Card className="flex flex-col gap-[20px] p-[28px] shadow-neu-lg">
-      <div className="flex items-start justify-between gap-4">
+    <Card className="flex flex-col gap-[20px] p-[20px] sm:p-[28px] shadow-neu-lg">
+      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
         <div className="flex flex-col gap-[8px]">
           <div className="flex items-center gap-[8px]">
             <AreaTag>{r.area}</AreaTag>
@@ -154,14 +154,14 @@ export default function PublishRequestsPage() {
           <div className="flex min-w-0 flex-1 flex-col gap-[24px]">
             {requests.map((r) =>
               done[r.id] ? (
-                <Card key={r.id} className="flex items-center justify-between gap-4 p-[24px]">
+                <Card key={r.id} className="flex items-center justify-between gap-4 p-[18px] sm:p-[24px]">
                   <span className="font-display text-[19px] leading-normal font-semibold text-teal-900">{r.title}</span>
                   <StatusChip status={done[r.id] === "published" ? "Published" : "Changes Requested"} label={done[r.id] === "published" ? "Published" : "Rejected"} />
                 </Card>
               ) : open === r.id ? (
                 <Expanded key={r.id} r={r} onDone={(s) => setDone({ ...done, [r.id]: s })} />
               ) : (
-                <Card key={r.id} className="flex flex-wrap items-center justify-between gap-4 p-[24px]">
+                <Card key={r.id} className="flex flex-wrap items-center justify-between gap-4 p-[18px] sm:p-[24px]">
                   <div className="flex flex-col gap-[6px]">
                     <span className="font-display text-[19px] leading-normal font-semibold text-teal-900">{r.title}</span>
                     <div className="flex flex-wrap items-center gap-[24px]">
@@ -179,7 +179,7 @@ export default function PublishRequestsPage() {
           </div>
 
           <div className="flex w-full shrink-0 flex-col gap-[28px] xl:w-[340px]">
-            <Card className="flex flex-col gap-[14px] p-[24px]">
+            <Card className="flex flex-col gap-[14px] p-[18px] sm:p-[24px]">
               <SectionHead title="Before publishing" />
               {checklist.map((c) => (
                 <div key={c} className="flex items-start gap-[10px]">
@@ -190,7 +190,7 @@ export default function PublishRequestsPage() {
                 </div>
               ))}
             </Card>
-            <Card className="flex flex-col gap-[14px] p-[24px]">
+            <Card className="flex flex-col gap-[14px] p-[18px] sm:p-[24px]">
               <SectionHead title="Recently published" />
               {recent.map((p) => (
                 <div key={p.title} className="flex flex-col gap-[2px] leading-normal">

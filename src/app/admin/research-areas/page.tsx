@@ -45,7 +45,7 @@ export default function ResearchAreasPage() {
               add();
             }}
           >
-            <label className={cn(fieldClasses(), "h-[48px] flex-1 px-[16px] focus-within:px-[15px]")}>
+            <label className={cn(fieldClasses(), "h-[48px] min-w-0 flex-1 px-[16px] focus-within:px-[15px]")}>
               <Icon name="layers" className="shrink-0 text-muted" />
               <input
                 value={draft}

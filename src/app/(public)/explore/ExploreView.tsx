@@ -17,7 +17,7 @@ type Year = (typeof years)[number];
 
 function EmptyState({ onClear, onTry }: { onClear: () => void; onTry: (q: string) => void }) {
   return (
-    <div className="flex w-full flex-col items-center gap-[16px] rounded-[24px] bg-ice p-[56px] shadow-neu">
+    <div className="flex w-full flex-col items-center gap-[16px] rounded-[24px] bg-ice px-5 py-10 text-center shadow-neu sm:p-[56px]">
       <div className="neu-inset relative size-[140px] rounded-full">
         <span className="absolute top-[38px] left-[38px] flex size-[64px] items-center justify-center rounded-full bg-ice text-peach-700 shadow-neu-sm">
           <Icon name="search" />
@@ -56,9 +56,9 @@ function ProjectRow({ project }: { project: (typeof publishedProjects)[number] }
   return (
     <Link
       href={`/explore/${project.slug}`}
-      className="group flex w-full items-center gap-[20px] rounded-[24px] bg-ice p-[16px] shadow-neu transition-transform hover:-translate-y-0.5"
+      className="group flex w-full items-center gap-[14px] rounded-[24px] bg-ice p-[14px] shadow-neu sm:gap-[20px] sm:p-[16px] transition-transform hover:-translate-y-0.5"
     >
-      <div className="relative h-[96px] w-[150px] shrink-0 overflow-hidden rounded-[16px]">
+      <div className="relative h-[80px] w-[96px] shrink-0 overflow-hidden rounded-[14px] sm:h-[96px] sm:w-[150px] sm:rounded-[16px]">
         <Image src={project.cover} alt="" fill sizes="150px" className="object-cover" />
       </div>
       <div className="flex min-w-0 flex-1 flex-col items-start gap-[8px]">
@@ -86,6 +86,7 @@ export function ExploreView() {
   const [year, setYear] = useState<Year>("All");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [page, setPage] = useState(1);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -113,15 +114,31 @@ export function ExploreView() {
   );
 
   return (
-    <div className="flex flex-col gap-[32px] px-6 pb-[72px] lg:flex-row lg:items-start lg:px-[80px]">
+    <div className="flex flex-col gap-[24px] px-4 sm:px-6 pb-[56px] sm:pb-[72px] lg:gap-[32px] lg:flex-row lg:items-start lg:px-[80px]">
       {/* Filters */}
-      <aside className="flex w-full shrink-0 flex-col gap-[20px] rounded-[24px] bg-ice p-[24px] shadow-neu lg:w-[280px]">
+      <aside className="flex w-full shrink-0 flex-col gap-[20px] rounded-[24px] bg-ice p-[20px] shadow-neu sm:p-[24px] lg:w-[280px]">
         <div className="flex items-center justify-between leading-normal font-semibold">
-          <p className="text-[17px] text-teal-900">Filters</p>
+          {/* the heading toggles the panel below lg */}
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((o) => !o)}
+            aria-expanded={filtersOpen}
+            className="flex items-center gap-[8px] text-[17px] text-teal-900 lg:pointer-events-none"
+          >
+            <Icon name="filter" className="text-teal-700 lg:hidden" />
+            Filters
+            {(areas.length > 0 || year !== "All") && (
+              <span className="rounded-full bg-peach-500 px-[8px] py-[1px] text-[11.5px] text-inverse lg:hidden">
+                {areas.length + (year !== "All" ? 1 : 0)}
+              </span>
+            )}
+            <Icon name="chevronDown" className={cn("text-muted transition-transform lg:hidden", filtersOpen && "rotate-180")} />
+          </button>
           <button type="button" onClick={clear} className="text-[13px] text-teal-700 hover:underline">
             Clear all
           </button>
         </div>
+        <div className={cn("flex-col gap-[20px] lg:flex", filtersOpen ? "flex" : "hidden")}>
         <p className="text-[11px] leading-normal font-semibold tracking-[0.88px] text-placeholder">RESEARCH AREA</p>
         {researchAreas.map((a) => (
           <div key={a.name} className="flex items-center justify-between">
@@ -145,12 +162,13 @@ export function ExploreView() {
           </select>
           <Icon name="chevronDown" className="pointer-events-none absolute right-[16px] text-muted" />
         </label>
+        </div>
       </aside>
 
       {/* Results */}
       <section className="flex min-w-0 flex-1 flex-col gap-[24px]">
         <div className="flex flex-wrap items-center gap-[14px]">
-          <label className="neu-inset flex h-[50px] min-w-[240px] flex-1 items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
+          <label className="neu-inset flex h-[50px] w-full min-w-0 sm:w-auto sm:min-w-[240px] sm:flex-1 items-center gap-[10px] rounded-[14px] border border-field px-[16px] focus-within:border-2 focus-within:border-focus focus-within:px-[15px]">
             <Icon name="search" className="shrink-0 text-muted" />
             <input
               value={query}
@@ -164,8 +182,8 @@ export function ExploreView() {
               </button>
             )}
           </label>
-          <label className="neu-inset relative flex h-[50px] items-center rounded-[14px] border border-field px-[16px]">
-            <select className="appearance-none bg-transparent pr-[30px] text-[13.5px] font-medium text-ink outline-none">
+          <label className="neu-inset relative flex h-[50px] flex-1 items-center rounded-[14px] border border-field px-[16px] sm:flex-none">
+            <select className="w-full appearance-none bg-transparent pr-[30px] text-[13.5px] font-medium text-ink outline-none">
               <option>Newest first</option>
               <option>Oldest first</option>
               <option>A–Z</option>
